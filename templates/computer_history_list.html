@@ -1,0 +1,93 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>{{ title }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbar-fixed/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+    <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    {% include 'navbar.html' %}
+   <main role="main" class="container">
+      <div class="jumbotron bg-warning">
+{#      {% if messages %}#}
+{#        <ul class="messages">#}
+{#               {% for message in messages %}#}
+{#                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
+{#                         {{ message }}#}
+{#                     </li>#}
+{#               {% endfor %}#}
+{#       </ul>#}
+{#{% endif %}#}
+       <h1 class="h11 text-center">Computer History List</h1>
+        <table class="table table-bordered table-danger text-center">
+            <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>Computer Name</th>
+                <th>IP Address</th>
+                <th>MAC Address</th>
+                <th>User Name</th>
+                <th>Locations</th>
+                <th>Price</th>
+                <th>Purchase Date</th>
+                <th>TimeStamp</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in queryset %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td><a href="{% url 'computer_list_update' item.id %}"/>{{ item.computer_name }}</td>
+                <td>{{ item.IP_address }}</td>
+                <td>{{ item.MAC_address }}</td>
+                <td>{{ item.users_name }}</td>
+                <td>{{ item.location }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.purchase_date }}</td>
+                <td>{{ item.timestamp }}</td>
+                <td>
+                    {% if perms.djangoapp.change_computer %}
+                    <a  href="{% url 'computer_list_update' item.id %}"
+                        data-toggle="tooltip" title="Update This Item" class="btn btn-success">Update</a>
+                        {% else %}
+                        <a class="btn btn-info">Update</a>
+                        {% endif %}
+
+                    <a href="{% url 'history_delete' item.id %}"
+                       data-toggle="tooltip" title="Delete This Item" class="btn btn-danger">Delete</a>
+
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+      </div>
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js'%}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="{% static "js/jquery-slim.min.js"%}""><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+  </body>
+</html>

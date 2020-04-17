@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>{{ title }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbar-fixed/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/navbar-top-fixed.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    {% include 'navbar.html' %}
+   <main role="main" class="container">
+      <div class="jumbotron bg-info">
+      <div class="row">
+          <div>
+                <h1 id="h11" class="text-center font-weight-bold text-danger">This is My Project</h1>
+                <p class="h11 lead text-center font-weight-bold">This is our Home Page</p>
+              {% if request.user.is_authenticated %}
+              <h1 class="h11 text-danger">Welcome to my New Project</h1>
+                  <div class="col-md-12">
+                  <img style="width:100%" src="/static/img/img11.jpg">
+                  </div>
+                  {% else %}
+                  <center><a class="btn btn-lg btn-primary text-center" href="{% url 'login' %}" role="button">Login</a></center>
+              {% endif %}
+          </div>
+          <div class="col-sm-4">
+               {% block content %}
+                {% endblock %}
+          </div>
+      </div>
+      </div>
+
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js'%}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="{% static "js/jquery-slim.min.js"%}""><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+  </body>
+</html>

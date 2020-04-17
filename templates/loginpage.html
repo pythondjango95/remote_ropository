@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% block content %}
+<div class="container1 text-left">
+    <div class="row">
+        <div class="offset-md-6 col-md-6">
+
+            <form method="POST">
+                <h2 class="text-center mt-5 bg-primary text-white">Login Page</h2>
+                {% csrf_token %}
+                <lable>Username:</lable>
+                <input type="text" name="username" class="form-control">
+
+                <lable>Password:</lable>
+                <input type="password" name="password" class="form-control">
+            <br>
+                <center>
+                <input type="submit" value="Login" class="btn btn-danger">
+                </center>
+            <br>
+                {% for i in messages %}
+                <p id="p11">{{ i }}</p>
+                {% endfor %}
+                <h3>Create New Account:<a class="btn btn-success" href="{% url 'register' %}">SingUp</a></h3>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>
